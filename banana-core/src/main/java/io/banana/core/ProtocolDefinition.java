@@ -4,7 +4,6 @@
  */
 package io.banana.core;
 
-
 /**
  * 
  * @author Xiong Zhijun
@@ -16,6 +15,7 @@ public class ProtocolDefinition {
 	private String name;
 	private String[] dependencyURLs;
 	private String[] springLocations;
+	private boolean autoStart;
 
 	public String getName() {
 		return name;
@@ -39,6 +39,14 @@ public class ProtocolDefinition {
 
 	public void setSpringLocations(String[] springLocations) {
 		this.springLocations = springLocations;
+	}
+
+	public boolean isAutoStart() {
+		return autoStart;
+	}
+
+	public void setAutoStart(boolean autoStart) {
+		this.autoStart = autoStart;
 	}
 
 }

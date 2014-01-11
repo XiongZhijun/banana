@@ -6,6 +6,7 @@ package io.banana.core;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -31,10 +32,12 @@ public class ProtocolDefinitionTest {
 		definition.setDependencyURLs(new String[] { "sepa-gas.jar",
 				"sepa-core.jar" });
 		definition.setSpringLocations(new String[] { "sepa-gas-context.xml" });
+		definition.setAutoStart(true);
 		assertEquals("SEPA-GAS", definition.getName());
 		assertArrayEquals(new String[] { "sepa-gas.jar", "sepa-core.jar" },
 				definition.getDependencyURLs());
 		assertArrayEquals(new String[] { "sepa-gas-context.xml" },
 				definition.getSpringLocations());
+		assertTrue(definition.isAutoStart());
 	}
 }
