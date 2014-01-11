@@ -42,7 +42,17 @@ public class SimpleProtocolServer implements ProtocolServer {
 				|| ArrayUtils.isEmpty(definition.getSpringLocations());
 	}
 
-	public void stop(ProtocolDefinition definition) {
+	public void suspend() {
+		// TODO Auto-generated method stub
+
+	}
+
+	public void resume(Map<String, String> properties) {
+		// TODO Auto-generated method stub
+
+	}
+
+	public void stop() {
 		// TODO Auto-generated method stub
 
 	}
