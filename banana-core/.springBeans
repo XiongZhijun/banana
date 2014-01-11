@@ -7,7 +7,6 @@
 	</configSuffixes>
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
-		<config>src/test/resources/io/banana/core/ServerDefinitionTest-context.xml</config>
 	</configs>
 	<configSets>
 	</configSets>
