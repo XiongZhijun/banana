@@ -29,7 +29,7 @@ public class SimpleProtocolServerTest extends AbstractJUnit4SpringContextTests {
 		SimpleProtocolServer server = new SimpleProtocolServer(
 				applicationContext, classLoader);
 		ProtocolDefinition definition = new ProtocolDefinition();
-		server.start(definition);
+		server.start(definition, null);
 	}
 
 	@Test

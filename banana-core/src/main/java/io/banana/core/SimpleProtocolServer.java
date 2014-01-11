@@ -4,6 +4,8 @@
  */
 package io.banana.core;
 
+import java.util.Map;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.util.StringUtils;
 
@@ -28,7 +30,8 @@ public class SimpleProtocolServer implements ProtocolServer {
 		this.classLoader = classLoader;
 	}
 
-	public void start(ProtocolDefinition definition) {
+	public void start(ProtocolDefinition definition,
+			Map<String, String> properties) {
 		if (isInvalid(definition)) {
 			throw new IllegalProtocolDefinitionException(definition);
 		}

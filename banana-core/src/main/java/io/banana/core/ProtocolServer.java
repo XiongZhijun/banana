@@ -4,6 +4,8 @@
  */
 package io.banana.core;
 
+import java.util.Map;
+
 /**
  * 
  * @author Xiong Zhijun
@@ -12,7 +14,7 @@ package io.banana.core;
  */
 public interface ProtocolServer {
 
-	void start(ProtocolDefinition definition);
+	void start(ProtocolDefinition definition, Map<String, String> properties);
 
 	void stop(ProtocolDefinition definition);
 }
