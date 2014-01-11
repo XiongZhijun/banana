@@ -30,8 +30,7 @@ public class SimpleProtocolServer implements ProtocolServer {
 		this.classLoader = classLoader;
 	}
 
-	public void start(ProtocolDefinition definition,
-			Map<String, String> properties) {
+	public void start(ProtocolDefinition definition) {
 		if (isInvalid(definition)) {
 			throw new IllegalProtocolDefinitionException(definition);
 		}

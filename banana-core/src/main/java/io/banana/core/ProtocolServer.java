@@ -16,14 +16,12 @@ import java.util.Map;
 public interface ProtocolServer {
 
 	/**
-	 * 根据协议定义启动一个协议服务，可以为这个协议自定义一些参数。
+	 * 根据协议定义启动一个协议服务。
 	 * 
 	 * @param definition
 	 *            协议定义
-	 * @param properties
-	 *            启动协议的额外的一些参数。
 	 */
-	void start(ProtocolDefinition definition, Map<String, String> properties);
+	void start(ProtocolDefinition definition);
 
 	/**
 	 * 暂停协议服务。
