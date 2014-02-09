@@ -22,12 +22,10 @@ public class SimpleProtocolServer implements ProtocolServer {
 
 	/**
 	 * @param applicationContext
-	 * @param classLoader
 	 */
-	public SimpleProtocolServer(ApplicationContext applicationContext,
-			ClassLoader classLoader) {
+	public SimpleProtocolServer(ApplicationContext applicationContext) {
 		this.applicationContext = applicationContext;
-		this.classLoader = classLoader;
+		this.classLoader = applicationContext.getClassLoader();
 	}
 
 	public void start(ProtocolDefinition definition) {
