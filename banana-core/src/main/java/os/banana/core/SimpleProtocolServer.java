@@ -2,7 +2,7 @@
  * Copyright © 2014 Xiong Zhijun, All Rights Reserved.
  * Email : hust.xzj@gmail.com 
  */
-package io.banana.core;
+package os.banana.core;
 
 import java.util.Map;
 
