@@ -31,23 +31,14 @@ public class MinaTcpServer implements Server {
 		nioTcpServer.unbind();
 	}
 
-	/**
-	 * @param port
-	 */
 	public void setPort(int port) {
 		this.port = port;
 	}
 
-	/**
-	 * @return
-	 */
 	public int getPort() {
 		return this.port;
 	}
 
-	/**
-	 * @param abstractIoHandler
-	 */
 	public void setIoHandler(IoHandler ioHandler) {
 		this.ioHandler = ioHandler;
 	}
