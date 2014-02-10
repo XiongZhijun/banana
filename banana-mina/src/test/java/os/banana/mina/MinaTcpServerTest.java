@@ -13,10 +13,9 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.mina.api.AbstractIoHandler;
 import org.apache.mina.api.IoSession;
+import org.apache.mina.filter.codec.ProtocolCodecFilter;
 import org.junit.Before;
 import org.junit.Test;
-
-import os.banana.mina.utils.ByteBufferUtils;
 
 /**
  * @author Xiong Zhijun
@@ -47,15 +46,15 @@ public class MinaTcpServerTest {
 		final String hello = "hello";
 		final CountDownLatch countDownLatch = new CountDownLatch(2);
 		server.setPort(port);
-		server.setFilters(null);
+		server.setFilters(new ProtocolCodecFilter<String, ByteBuffer, Void, Void>(
+				new StringEncoder(), new StringDecoder()));
 		server.setSessionConfig(null);
 		server.setHandler(new AbstractIoHandler() {
 			@Override
 			public void messageReceived(IoSession session, Object message) {
 				super.messageReceived(session, message);
-				assertTrue(message instanceof ByteBuffer);
-				ByteBuffer buffer = (ByteBuffer) message;
-				assertEquals(hello, ByteBufferUtils.toString(buffer));
+				assertTrue(message instanceof String);
+				assertEquals(hello, message);
 				countDownLatch.countDown();
 			}
 		});

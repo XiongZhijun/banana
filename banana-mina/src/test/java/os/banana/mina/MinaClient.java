@@ -8,15 +8,15 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.net.InetSocketAddress;
+import java.nio.ByteBuffer;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.mina.api.AbstractIoHandler;
 import org.apache.mina.api.IoFuture;
 import org.apache.mina.api.IoSession;
+import org.apache.mina.filter.codec.ProtocolCodecFilter;
 import org.apache.mina.transport.nio.NioTcpClient;
-
-import os.banana.mina.utils.ByteBufferUtils;
 
 /**
  * @author Xiong Zhijun
@@ -38,7 +38,8 @@ public class MinaClient implements Runnable {
 
 	public void run() {
 		NioTcpClient client = new NioTcpClient();
-		client.setFilters();
+		client.setFilters(new ProtocolCodecFilter<String, ByteBuffer, Void, Void>(
+				new StringEncoder(), new StringDecoder()));
 		client.setIoHandler(new ClientIoHandler());
 		try {
 			IoFuture<IoSession> future = client.connect(new InetSocketAddress(
@@ -54,7 +55,7 @@ public class MinaClient implements Runnable {
 		@Override
 		public void sessionOpened(IoSession session) {
 			super.sessionOpened(session);
-			session.write(ByteBufferUtils.toByteBuffer(message));
+			session.write(message);
 			countDownLatch.countDown();
 		}
 	}

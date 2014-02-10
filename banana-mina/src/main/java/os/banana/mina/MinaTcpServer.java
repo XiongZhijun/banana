@@ -52,7 +52,7 @@ public class MinaTcpServer implements Server {
 		this.handler = handler;
 	}
 
-	public void setFilters(IoFilter[] filters) {
+	public void setFilters(IoFilter... filters) {
 		if (filters == null) {
 			return;
 		}
