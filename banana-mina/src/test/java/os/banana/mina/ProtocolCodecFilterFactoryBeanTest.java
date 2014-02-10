@@ -33,7 +33,6 @@ public class ProtocolCodecFilterFactoryBeanTest extends
 	@Test
 	public void testCreateInstance() {
 		assertEquals(3, filters.length);
-		System.out.println(filters[0].getClass());
 		assertTrue(filters[0] instanceof ProtocolCodecFilter);
 		assertEquals(filter1, filters[1]);
 		assertEquals(filter2, filters[2]);

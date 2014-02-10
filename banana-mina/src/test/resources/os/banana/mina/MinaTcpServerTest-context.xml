@@ -8,7 +8,7 @@
 	</bean>
 
 	<bean class="os.banana.mina.ProtocolCodecFilterFactoryBean"></bean>
-	<bean class="os.banana.mina.MinaTcpServerLoaderTest.TestIoHandler"></bean>
+	<bean class="os.banana.mina.MinaTcpServerTest.TestIoHandler"></bean>
 	<bean class="os.banana.mina.StringEncoder"></bean>
 	<bean class="os.banana.mina.StringDecoder"></bean>
 </beans>
