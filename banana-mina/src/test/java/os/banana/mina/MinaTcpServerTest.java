@@ -47,6 +47,8 @@ public class MinaTcpServerTest {
 		final String hello = "hello";
 		final CountDownLatch countDownLatch = new CountDownLatch(2);
 		server.setPort(port);
+		server.setFilters(null);
+		server.setSessionConfig(null);
 		server.setHandler(new AbstractIoHandler() {
 			@Override
 			public void messageReceived(IoSession session, Object message) {
