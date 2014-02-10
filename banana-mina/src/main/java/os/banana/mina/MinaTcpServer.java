@@ -11,6 +11,7 @@ import org.apache.mina.api.IoHandler;
 import org.apache.mina.transport.nio.NioTcpServer;
 import org.apache.mina.transport.tcp.DefaultTcpSessionConfig;
 import org.apache.mina.transport.tcp.TcpSessionConfig;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author Xiong Zhijun
@@ -22,9 +23,12 @@ public class MinaTcpServer implements Server {
 	/** 端口号 */
 	private int port;
 	private NioTcpServer tcpServer;
+	@Autowired
 	private IoHandler handler;
+	@Autowired(required = false)
 	private IoFilter[] filters = new IoFilter[0];
 	private boolean reuseAddress = false;
+	@Autowired(required = false)
 	private TcpSessionConfig sessionConfig = new DefaultTcpSessionConfig();
 
 	public void start() {
@@ -52,7 +56,8 @@ public class MinaTcpServer implements Server {
 		this.handler = handler;
 	}
 
-	public void setFilters(IoFilter... filters) {
+	@Autowired
+	public void setFilters(IoFilter[] filters) {
 		if (filters == null) {
 			return;
 		}

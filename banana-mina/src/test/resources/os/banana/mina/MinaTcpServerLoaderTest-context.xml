@@ -3,13 +3,11 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<bean class="os.banana.mina.MinaTcpServerLoader"></bean>
-
 	<bean id="server" class="os.banana.mina.MinaTcpServer" p:port="29999"
 		init-method="start">
 	</bean>
 
-	<bean class="os.banana.mina.IoFiltersFactoryBean"></bean>
+	<bean class="os.banana.mina.ProtocolCodecFilterFactoryBean"></bean>
 	<bean class="os.banana.mina.MinaTcpServerLoaderTest.TestIoHandler"></bean>
 	<bean class="os.banana.mina.StringEncoder"></bean>
 	<bean class="os.banana.mina.StringDecoder"></bean>

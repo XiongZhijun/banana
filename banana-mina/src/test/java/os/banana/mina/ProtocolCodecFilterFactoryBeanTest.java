@@ -21,16 +21,19 @@ import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
  * 
  */
 @ContextConfiguration
-public class IoFiltersFactoryBeanTest extends AbstractJUnit4SpringContextTests {
+public class ProtocolCodecFilterFactoryBeanTest extends
+		AbstractJUnit4SpringContextTests {
 	@Autowired
 	private TestFilter1 filter1;
 	@Autowired
 	private TestFilter2 filter2;
+	@Autowired
+	private IoFilter[] filters;
 
 	@Test
 	public void testCreateInstance() {
-		IoFilter[] filters = applicationContext.getBean(IoFilter[].class);
 		assertEquals(3, filters.length);
+		System.out.println(filters[0].getClass());
 		assertTrue(filters[0] instanceof ProtocolCodecFilter);
 		assertEquals(filter1, filters[1]);
 		assertEquals(filter2, filters[2]);
@@ -38,14 +41,14 @@ public class IoFiltersFactoryBeanTest extends AbstractJUnit4SpringContextTests {
 
 	public static class TestFilter1 extends AbstractIoFilter implements Ordered {
 		public int getOrder() {
-			return 0;
+			return 1;
 		}
 
 	}
 
 	public static class TestFilter2 extends AbstractIoFilter implements Ordered {
 		public int getOrder() {
-			return 1;
+			return 2;
 		}
 
 	}

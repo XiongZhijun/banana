@@ -12,6 +12,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.mina.api.AbstractIoHandler;
+import org.apache.mina.api.IoFilter;
 import org.apache.mina.api.IoSession;
 import org.apache.mina.filter.codec.ProtocolCodecFilter;
 import org.junit.Before;
@@ -46,8 +47,8 @@ public class MinaTcpServerTest {
 		final String hello = "hello";
 		final CountDownLatch countDownLatch = new CountDownLatch(2);
 		server.setPort(port);
-		server.setFilters(new ProtocolCodecFilter<String, ByteBuffer, Void, Void>(
-				new StringEncoder(), new StringDecoder()));
+		server.setFilters(new IoFilter[] { new ProtocolCodecFilter<String, ByteBuffer, Void, Void>(
+				new StringEncoder(), new StringDecoder()) });
 		server.setSessionConfig(null);
 		server.setHandler(new AbstractIoHandler() {
 			@Override
