@@ -8,7 +8,10 @@ import java.net.InetSocketAddress;
 
 import org.apache.mina.api.IoFilter;
 import org.apache.mina.api.IoHandler;
+import org.apache.mina.service.executor.IoHandlerExecutor;
+import org.apache.mina.transport.nio.FixedSelectorLoopPool;
 import org.apache.mina.transport.nio.NioTcpServer;
+import org.apache.mina.transport.nio.SelectorLoopPool;
 import org.apache.mina.transport.tcp.DefaultTcpSessionConfig;
 import org.apache.mina.transport.tcp.TcpSessionConfig;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,9 +33,16 @@ public class MinaTcpServer implements Server {
 	private boolean reuseAddress = false;
 	@Autowired(required = false)
 	private TcpSessionConfig sessionConfig = new DefaultTcpSessionConfig();
+	private SelectorLoopPool selectorLoopPool;
+	private IoHandlerExecutor handlerExecutor;
 
 	public void start() {
-		tcpServer = new NioTcpServer();
+		if (selectorLoopPool == null) {
+			selectorLoopPool = new FixedSelectorLoopPool("Server", Runtime
+					.getRuntime().availableProcessors() + 1);
+		}
+		tcpServer = new NioTcpServer(sessionConfig, selectorLoopPool,
+				handlerExecutor);
 		tcpServer.setFilters(filters);
 		tcpServer.setReuseAddress(reuseAddress);
 		tcpServer.setSessionConfig(sessionConfig);
@@ -73,6 +83,14 @@ public class MinaTcpServer implements Server {
 			return;
 		}
 		this.sessionConfig = sessionConfig;
+	}
+
+	public void setSelectorLoopPool(SelectorLoopPool selectorLoopPool) {
+		this.selectorLoopPool = selectorLoopPool;
+	}
+
+	public void setHandlerExecutor(IoHandlerExecutor handlerExecutor) {
+		this.handlerExecutor = handlerExecutor;
 	}
 
 }
