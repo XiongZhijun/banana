@@ -18,17 +18,17 @@ public class MinaTcpServer implements Server {
 
 	/** 端口号 */
 	private int port;
-	private NioTcpServer nioTcpServer;
-	private IoHandler ioHandler;
+	private NioTcpServer tcpServer;
+	private IoHandler handler;
 
 	public void start() {
-		nioTcpServer = new NioTcpServer();
-		nioTcpServer.setIoHandler(ioHandler);
-		nioTcpServer.bind(new InetSocketAddress(port));
+		tcpServer = new NioTcpServer();
+		tcpServer.setIoHandler(handler);
+		tcpServer.bind(new InetSocketAddress(port));
 	}
 
 	public void stop() {
-		nioTcpServer.unbind();
+		tcpServer.unbind();
 	}
 
 	public void setPort(int port) {
@@ -39,8 +39,8 @@ public class MinaTcpServer implements Server {
 		return this.port;
 	}
 
-	public void setIoHandler(IoHandler ioHandler) {
-		this.ioHandler = ioHandler;
+	public void setHandler(IoHandler handler) {
+		this.handler = handler;
 	}
 
 }
