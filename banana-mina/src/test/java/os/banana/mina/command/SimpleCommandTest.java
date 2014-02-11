@@ -44,8 +44,13 @@ public class SimpleCommandTest {
 	@Test
 	public void testCreate() {
 		String id = "id1";
-		SimpleCommand command = new SimpleCommand(id);
-		assertEquals(id, command.getId());
+		SimpleCommand command1 = new SimpleCommand(id);
+		assertEquals(id, command1.getId());
+
+		Object content = new Object();
+		SimpleCommand command2 = new SimpleCommand(id, content);
+		assertEquals(id, command2.getId());
+		assertEquals(content, command2.getContent());
 	}
 
 }

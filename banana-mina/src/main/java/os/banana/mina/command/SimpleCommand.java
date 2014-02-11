@@ -15,10 +15,16 @@ public class SimpleCommand implements Command {
 	private Object content;
 
 	public SimpleCommand() {
+		this(null);
 	}
 
 	public SimpleCommand(String id) {
+		this(id, null);
+	}
+
+	public SimpleCommand(String id, Object content) {
 		this.id = id;
+		this.content = content;
 	}
 
 	public String getId() {
