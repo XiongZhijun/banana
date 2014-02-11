@@ -4,6 +4,8 @@
  */
 package os.banana.protocol.command;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import os.banana.protocol.Server;
 
 /**
@@ -12,6 +14,7 @@ import os.banana.protocol.Server;
  * 
  */
 public class SimpleCommandDispatcher implements CommandDispatcher {
+	@Autowired
 	private CommandControllerMapping controllerMapping;
 
 	public void doDispatch(Command command, CommandSender sender, Server server) {
