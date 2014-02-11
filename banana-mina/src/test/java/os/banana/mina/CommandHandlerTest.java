@@ -23,9 +23,10 @@ import org.easymock.TestSubject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import os.banana.mina.command.Command;
-import os.banana.mina.command.CommandDispatcher;
-import os.banana.mina.command.SimpleCommand;
+import os.banana.protocol.Server;
+import os.banana.protocol.command.Command;
+import os.banana.protocol.command.CommandDispatcher;
+import os.banana.protocol.command.SimpleCommand;
 
 
 /**

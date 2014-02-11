@@ -6,7 +6,7 @@ package os.banana.mina;
 
 import org.apache.mina.api.IoSession;
 
-import os.banana.mina.command.AbstractCommandSender;
+import os.banana.protocol.command.AbstractCommandSender;
 
 /**
  * @author Xiong Zhijun

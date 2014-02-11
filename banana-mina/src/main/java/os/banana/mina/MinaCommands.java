@@ -4,8 +4,8 @@
  */
 package os.banana.mina;
 
-import os.banana.mina.command.Command;
-import os.banana.mina.command.SimpleCommand;
+import os.banana.protocol.command.Command;
+import os.banana.protocol.command.SimpleCommand;
 
 /**
  * @author Xiong Zhijun

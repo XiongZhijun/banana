@@ -4,15 +4,22 @@
  */
 package os.banana.mina;
 
+import static os.banana.mina.MinaCommands.EXCEPTION_CAUGHT;
+import static os.banana.mina.MinaCommands.MESSAGE_RECEIVE;
+import static os.banana.mina.MinaCommands.SERVICE_ACTIVATED_COMMAND;
+import static os.banana.mina.MinaCommands.SERVICE_INACTIVATED_COMMAND;
+import static os.banana.mina.MinaCommands.SESSION_CLOSE_COMMAND;
+import static os.banana.mina.MinaCommands.SESSION_OPEN_COMMAND;
+
 import org.apache.mina.api.AbstractIoHandler;
 import org.apache.mina.api.IoService;
 import org.apache.mina.api.IoSession;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import os.banana.mina.command.Command;
-import os.banana.mina.command.CommandDispatcher;
-import os.banana.mina.command.SimpleCommand;
-import static os.banana.mina.MinaCommands.*;
+import os.banana.protocol.Server;
+import os.banana.protocol.command.Command;
+import os.banana.protocol.command.CommandDispatcher;
+import os.banana.protocol.command.SimpleCommand;
 
 /**
  * @author Xiong Zhijun

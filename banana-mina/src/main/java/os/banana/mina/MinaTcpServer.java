@@ -16,6 +16,8 @@ import org.apache.mina.transport.tcp.DefaultTcpSessionConfig;
 import org.apache.mina.transport.tcp.TcpSessionConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import os.banana.protocol.Server;
+
 /**
  * @author Xiong Zhijun
  * @email hust.xzj@gmail.com

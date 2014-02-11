@@ -2,9 +2,9 @@
  * Copyright © 2014 Xiong Zhijun, All Rights Reserved.
  * Email : hust.xzj@gmail.com
  */
-package os.banana.mina.command;
+package os.banana.protocol.command;
 
-import os.banana.mina.Server;
+import os.banana.protocol.Server;
 
 /**
  * @author Xiong Zhijun

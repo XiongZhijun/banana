@@ -2,7 +2,7 @@
  * Copyright © 2014 Xiong Zhijun, All Rights Reserved.
  * Email : hust.xzj@gmail.com
  */
-package os.banana.mina.command;
+package os.banana.protocol.command;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;

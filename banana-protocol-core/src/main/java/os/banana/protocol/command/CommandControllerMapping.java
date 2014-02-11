@@ -2,14 +2,14 @@
  * Copyright © 2014 Xiong Zhijun, All Rights Reserved.
  * Email : hust.xzj@gmail.com
  */
-package os.banana.mina.command;
+package os.banana.protocol.command;
 
 /**
  * @author Xiong Zhijun
  * @email hust.xzj@gmail.com
  * 
  */
-public interface CommandSender {
+public interface CommandControllerMapping {
 
-	SFuture send(Command command);
+	CommandController findCommandController(Command command);
 }

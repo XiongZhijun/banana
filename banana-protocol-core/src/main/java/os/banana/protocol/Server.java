@@ -2,14 +2,16 @@
  * Copyright © 2014 Xiong Zhijun, All Rights Reserved.
  * Email : hust.xzj@gmail.com
  */
-package os.banana.mina.command;
+package os.banana.protocol;
 
 /**
  * @author Xiong Zhijun
  * @email hust.xzj@gmail.com
  * 
  */
-public interface CommandControllerMapping {
+public interface Server {
 
-	CommandController findCommandController(Command command);
+	void start();
+
+	void stop();
 }

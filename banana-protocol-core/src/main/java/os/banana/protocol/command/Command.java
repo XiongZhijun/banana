@@ -2,16 +2,14 @@
  * Copyright © 2014 Xiong Zhijun, All Rights Reserved.
  * Email : hust.xzj@gmail.com
  */
-package os.banana.mina;
+package os.banana.protocol.command;
 
 /**
  * @author Xiong Zhijun
  * @email hust.xzj@gmail.com
  * 
  */
-public interface Server {
+public interface Command {
 
-	void start();
-
-	void stop();
+	String getId();
 }
