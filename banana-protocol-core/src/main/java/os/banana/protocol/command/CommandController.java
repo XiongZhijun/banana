@@ -11,7 +11,16 @@ import os.banana.protocol.Server;
  * @email hust.xzj@gmail.com
  * 
  */
-public interface CommandController {
+public interface CommandController<T extends Command> {
 
-	void handle(Command command, CommandSender sender, Server server);
+	CommandController<?> EMPTY_COMMAND_CONTROLLER = new EmptyCommandController();
+
+	void handle(T command, CommandSender sender, Server server);
+
+	class EmptyCommandController implements CommandController<Command> {
+
+		public void handle(Command command, CommandSender sender, Server server) {
+		}
+
+	}
 }

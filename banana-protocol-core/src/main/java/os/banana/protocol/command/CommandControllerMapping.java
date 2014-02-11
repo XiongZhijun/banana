@@ -11,5 +11,5 @@ package os.banana.protocol.command;
  */
 public interface CommandControllerMapping {
 
-	CommandController findCommandController(Command command);
+	<T extends Command> CommandController<T> findCommandController(T command);
 }
