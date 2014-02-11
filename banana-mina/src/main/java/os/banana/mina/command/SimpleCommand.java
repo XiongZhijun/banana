@@ -7,9 +7,18 @@ package os.banana.mina.command;
 /**
  * @author Xiong Zhijun
  * @email hust.xzj@gmail.com
- * 
+ *
  */
-public interface Command {
+public class SimpleCommand implements Command {
 
-	String getId();
+	private String id;
+
+	public String getId() {
+		return this.id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
 }
