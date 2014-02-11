@@ -12,14 +12,22 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
+		<!-- cherry -->
+		<cherry-lang.version>0.0.2-SNAPSHOT</cherry-lang.version>
 		<!-- Spring -->
 		<spring-framework.version>4.0.1.RELEASE</spring-framework.version>
 		<mina.version>3.0.0-M2</mina.version>
 		<!-- Test -->
 		<junit.version>4.11</junit.version>
+		<easymock.version>3.2</easymock.version>
 
 	</properties>
 	<dependencies>
+		<dependency>
+			<groupId>os.cherry</groupId>
+			<artifactId>cherry-lang</artifactId>
+			<version>${cherry-lang.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.apache.mina</groupId>
 			<artifactId>mina-core</artifactId>
@@ -45,9 +53,10 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>os.cherry</groupId>
-			<artifactId>cherry-lang</artifactId>
-			<version>0.0.2-SNAPSHOT</version>
+			<groupId>org.easymock</groupId>
+			<artifactId>easymock</artifactId>
+			<version>${easymock.version}</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 </project>
