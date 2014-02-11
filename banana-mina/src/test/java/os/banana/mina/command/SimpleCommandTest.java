@@ -4,9 +4,9 @@
  */
 package os.banana.mina.command;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import os.cherry.lang.StringUtils;
@@ -18,19 +18,20 @@ import os.cherry.lang.StringUtils;
  */
 public class SimpleCommandTest {
 
-	private SimpleCommand command;
-
-	@Before
-	public void setUp() {
-		command = new SimpleCommand();
-	}
-
 	@Test
 	public void testGetId() {
+		SimpleCommand command = new SimpleCommand();
 		assertTrue(StringUtils.isBlank(command.getId()));
 		String newCommandId = "newCommandId";
 		command.setId(newCommandId);
 		assertEquals(newCommandId, command.getId());
+	}
+
+	@Test
+	public void testCreate() {
+		String id = "id1";
+		SimpleCommand command = new SimpleCommand(id);
+		assertEquals(id, command.getId());
 	}
 
 }
