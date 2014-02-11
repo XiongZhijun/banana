@@ -12,6 +12,7 @@ package os.banana.mina.command;
 public class SimpleCommand implements Command {
 
 	private String id;
+	private Object content;
 
 	public SimpleCommand() {
 	}
@@ -26,6 +27,14 @@ public class SimpleCommand implements Command {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public void setContent(Object content) {
+		this.content = content;
+	}
+
+	public Object getContent() {
+		return this.content;
 	}
 
 }
