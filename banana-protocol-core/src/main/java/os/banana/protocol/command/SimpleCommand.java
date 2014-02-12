@@ -43,4 +43,12 @@ public class SimpleCommand implements Command {
 		return this.content;
 	}
 
+	public String buildSendSerialNumber() {
+		return this.id;
+	}
+
+	public String getSendedSerialNumber() {
+		return this.id;
+	}
+
 }

@@ -12,4 +12,8 @@ package os.banana.protocol.command;
 public interface Command {
 
 	String getId();
+
+	String buildSendSerialNumber();
+	
+	String getSendedSerialNumber();
 }

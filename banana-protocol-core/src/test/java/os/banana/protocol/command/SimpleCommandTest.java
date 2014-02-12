@@ -53,4 +53,11 @@ public class SimpleCommandTest {
 		assertEquals(content, command2.getContent());
 	}
 
+	@Test
+	public void testSerialNumber() {
+		command.setId("id1");
+		assertEquals("id1", command.buildSendSerialNumber());
+		assertEquals("id1", command.getSendedSerialNumber());
+	}
+
 }
