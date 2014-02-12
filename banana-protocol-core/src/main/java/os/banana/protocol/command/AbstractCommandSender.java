@@ -11,11 +11,14 @@ import os.banana.protocol.SFuture;
  * @email hust.xzj@gmail.com
  * 
  */
-public class AbstractCommandSender implements CommandSender {
+public abstract class AbstractCommandSender<T extends Command> implements
+		CommandSender<T> {
 
-	public <T extends Command> SFuture<T> send(T command) {
-		// TODO Auto-generated method stub
+	public SFuture<T> send(T command) {
+		doSend(command);
 		return null;
 	}
+
+	protected abstract void doSend(T command);
 
 }

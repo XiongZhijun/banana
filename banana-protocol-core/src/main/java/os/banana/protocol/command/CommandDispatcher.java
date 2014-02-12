@@ -13,5 +13,6 @@ import os.banana.protocol.Server;
  */
 public interface CommandDispatcher {
 
-	void doDispatch(Command command, CommandSender sender, Server server);
+	void doDispatch(Command command, CommandSender<Command> sender,
+			Server server);
 }
