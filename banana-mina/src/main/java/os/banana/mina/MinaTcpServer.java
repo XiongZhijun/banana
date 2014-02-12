@@ -37,6 +37,7 @@ public class MinaTcpServer implements Server {
 	private TcpSessionConfig sessionConfig = new DefaultTcpSessionConfig();
 	private SelectorLoopPool selectorLoopPool;
 	private IoHandlerExecutor handlerExecutor;
+	private String name;
 
 	public void start() {
 		if (selectorLoopPool == null) {
@@ -54,6 +55,14 @@ public class MinaTcpServer implements Server {
 
 	public void stop() {
 		tcpServer.unbind();
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getName() {
+		return this.name;
 	}
 
 	public void setPort(int port) {

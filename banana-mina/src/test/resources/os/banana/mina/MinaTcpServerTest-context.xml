@@ -4,7 +4,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<bean id="server" class="os.banana.mina.MinaTcpServer" p:port="29999"
-		init-method="start">
+		p:name="MinaServer1" init-method="start">
 	</bean>
 
 	<bean class="os.banana.mina.ProtocolCodecFilterFactoryBean"></bean>

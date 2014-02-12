@@ -7,6 +7,7 @@ package os.banana.mina;
 import org.apache.mina.api.IoSession;
 
 import os.banana.protocol.command.AbstractCommandSender;
+import os.banana.protocol.command.Command;
 
 /**
  * @author Xiong Zhijun
@@ -22,6 +23,11 @@ public class MinaSessionSender extends AbstractCommandSender {
 
 	public MinaSessionSender(IoSession session) {
 		this.session = session;
+	}
+
+	@Override
+	protected void doSend(Command command) {
+		session.write(command);
 	}
 
 	public IoSession getSession() {

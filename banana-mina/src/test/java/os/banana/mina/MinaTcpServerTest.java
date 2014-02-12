@@ -36,6 +36,11 @@ public class MinaTcpServerTest extends AbstractJUnit4SpringContextTests {
 	}
 
 	@Test
+	public void testGetName() {
+		assertEquals("MinaServer1", server.getName());
+	}
+
+	@Test
 	public void testStart() throws InterruptedException {
 		countDownLatch = new CountDownLatch(2);
 		new Thread(new MinaClient(server.getPort(), HELLO, countDownLatch))
