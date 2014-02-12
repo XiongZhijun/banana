@@ -1,0 +1,72 @@
+/**
+ * Copyright © 2014 Xiong Zhijun, All Rights Reserved.
+ * Email : hust.xzj@gmail.com
+ */
+package os.banana.protocol;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
+
+import os.banana.protocol.command.Command;
+
+/**
+ * @author Xiong Zhijun
+ * @email hust.xzj@gmail.com
+ * 
+ */
+public class FutureManager {
+
+	private static final int FIVE_MINUTES = 5;
+
+	private Map<Object, SFuture<?>> futureMap = new HashMap<Object, SFuture<?>>();
+	private long period = FIVE_MINUTES;
+	private TimeUnit timeUnit = TimeUnit.MINUTES;
+
+	public FutureManager() {
+		super();
+		new Timer("FutureManager").schedule(new TimeoutFutureCleaner(),
+				timeUnit.toMillis(period), timeUnit.toMillis(period));
+	}
+
+	@SuppressWarnings("unchecked")
+	public <T extends Command> SFuture<T> getFuture(T command) {
+		synchronized (futureMap) {
+			return (SFuture<T>) futureMap.get(command.getSendedSerialNumber());
+		}
+	}
+
+	public <T extends Command> SFuture<T> registFuture(T command,
+			SFuture<T> future) {
+		synchronized (futureMap) {
+			futureMap.put(command.buildSendSerialNumber(), future);
+			return future;
+		}
+	}
+
+	public void setPeriod(long period) {
+		this.period = period;
+	}
+
+	public void setTimeUnit(TimeUnit timeUnit) {
+		this.timeUnit = timeUnit;
+	}
+
+	class TimeoutFutureCleaner extends TimerTask {
+		@Override
+		public void run() {
+			synchronized (futureMap) {
+				Object[] array = futureMap.keySet().toArray();
+				for (Object key : array) {
+					SFuture<?> future = futureMap.get(key);
+					if (future != null && future.isTimeout()) {
+						futureMap.remove(key);
+					}
+				}
+			}
+		}
+	}
+
+}
