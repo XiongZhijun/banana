@@ -17,8 +17,7 @@ public class SimpleCommandDispatcher implements CommandDispatcher {
 	@Autowired
 	private CommandControllerMapping controllerMapping;
 
-	public void doDispatch(Command command, CommandSender<Command> sender,
-			Server server) {
+	public void doDispatch(Command command, CommandSender sender, Server server) {
 		CommandController<Command> controller = controllerMapping
 				.findCommandController(command);
 		controller.handle(command, sender, server);

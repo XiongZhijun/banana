@@ -11,7 +11,7 @@ import os.banana.protocol.SFuture;
  * @email hust.xzj@gmail.com
  * 
  */
-public interface CommandSender<T extends Command> {
+public interface CommandSender {
 
-	SFuture<T> send(T command);
+	<T extends Command> SFuture<T> send(T command);
 }

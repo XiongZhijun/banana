@@ -15,12 +15,11 @@ public interface CommandController<T extends Command> {
 
 	CommandController<?> EMPTY_COMMAND_CONTROLLER = new EmptyCommandController();
 
-	void handle(T command, CommandSender<T> sender, Server server);
+	void handle(T command, CommandSender sender, Server server);
 
 	class EmptyCommandController implements CommandController<Command> {
 
-		public void handle(Command command, CommandSender<Command> sender,
-				Server server) {
+		public void handle(Command command, CommandSender sender, Server server) {
 		}
 
 	}

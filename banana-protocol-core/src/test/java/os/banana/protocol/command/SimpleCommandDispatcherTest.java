@@ -28,7 +28,7 @@ public class SimpleCommandDispatcherTest {
 	@Mock
 	private Command command;
 	@Mock
-	private CommandSender<Command> sender;
+	private CommandSender sender;
 	@Mock
 	private Server server;
 	@Mock

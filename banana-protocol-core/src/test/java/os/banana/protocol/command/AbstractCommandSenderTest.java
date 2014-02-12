@@ -25,7 +25,7 @@ import static org.easymock.EasyMock.*;
 public class AbstractCommandSenderTest {
 
 	@TestSubject
-	private AbstractCommandSender<Command> commandSender = new TestCommandSender();
+	private AbstractCommandSender commandSender = new TestCommandSender();
 	private FutureManager futureManager = new FutureManager();
 	@Mock
 	private Command request;
@@ -39,18 +39,18 @@ public class AbstractCommandSenderTest {
 		expect(request.buildSendSerialNumber()).andReturn("sn100");
 		expect(response1.getSendedSerialNumber()).andReturn("sn100");
 		expect(response2.getSendedSerialNumber()).andReturn("sn101").times(2);
-		
+
 		replay(request, response1, response2);
 		commandSender.setFutureManager(futureManager);
 		SFuture<Command> future = commandSender.send(request);
-		
+
 		assertNull(futureManager.getFuture(response2));
 		assertEquals(future, futureManager.getFuture(response1));
 		assertNull(futureManager.getFuture(response2));
 		verify(request, response1, response2);
 	}
 
-	class TestCommandSender extends AbstractCommandSender<Command> {
+	class TestCommandSender extends AbstractCommandSender {
 
 		@Override
 		protected void doSend(Command command) {

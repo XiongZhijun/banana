@@ -15,22 +15,21 @@ import os.banana.protocol.SFuture;
  * @email hust.xzj@gmail.com
  * 
  */
-public abstract class AbstractCommandSender<T extends Command> implements
-		CommandSender<T> {
+public abstract class AbstractCommandSender implements CommandSender {
 	@Autowired
 	private FutureManager futureManager;
 
-	public SFuture<T> send(T command) {
+	public <T extends Command> SFuture<T> send(T command) {
 		doSend(command);
 		SFuture<T> future = buildFuture(command);
 		return futureManager.registFuture(command, future);
 	}
 
-	protected SFuture<T> buildFuture(T command) {
+	protected <T extends Command> SFuture<T> buildFuture(T command) {
 		return new DefaultFuture<T>();
 	}
 
-	protected abstract void doSend(T command);
+	protected abstract <T extends Command> void doSend(T command);
 
 	public void setFutureManager(FutureManager futureManager) {
 		this.futureManager = futureManager;
