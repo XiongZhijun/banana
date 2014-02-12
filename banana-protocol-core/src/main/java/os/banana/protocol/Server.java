@@ -11,6 +11,8 @@ package os.banana.protocol;
  */
 public interface Server {
 
+	String getName();
+
 	void start();
 
 	void stop();
