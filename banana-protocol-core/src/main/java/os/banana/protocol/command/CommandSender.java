@@ -4,6 +4,8 @@
  */
 package os.banana.protocol.command;
 
+import os.banana.protocol.SFuture;
+
 /**
  * @author Xiong Zhijun
  * @email hust.xzj@gmail.com
@@ -11,5 +13,5 @@ package os.banana.protocol.command;
  */
 public interface CommandSender {
 
-	SFuture send(Command command);
+	<T extends Command> SFuture<T> send(T command);
 }
