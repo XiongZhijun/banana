@@ -27,6 +27,8 @@ public class MinaTcpServer implements Server {
 
 	/** 端口号 */
 	private int port;
+	/** 服务名称 */
+	private String name;
 	private NioTcpServer tcpServer;
 	@Autowired
 	private IoHandler handler;
@@ -37,7 +39,6 @@ public class MinaTcpServer implements Server {
 	private TcpSessionConfig sessionConfig = new DefaultTcpSessionConfig();
 	private SelectorLoopPool selectorLoopPool;
 	private IoHandlerExecutor handlerExecutor;
-	private String name;
 
 	public void start() {
 		if (selectorLoopPool == null) {
