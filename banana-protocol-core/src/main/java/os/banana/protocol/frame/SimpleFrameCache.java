@@ -38,6 +38,7 @@ public class SimpleFrameCache implements FrameCache {
 			return ArrayUtils.EMPTY_BYTE_ARRAY;
 		}
 		byte[] removed = array.remove(startIndex, endIndex + tail.length);
+		array.remove(0, startIndex);
 		return removed;
 	}
 
@@ -78,6 +79,14 @@ public class SimpleFrameCache implements FrameCache {
 	public SimpleFrameCache setTail(byte[] tail) {
 		this.tail = tail;
 		return this;
+	}
+
+	public byte[] getHead() {
+		return head;
+	}
+
+	public byte[] getTail() {
+		return tail;
 	}
 
 }
