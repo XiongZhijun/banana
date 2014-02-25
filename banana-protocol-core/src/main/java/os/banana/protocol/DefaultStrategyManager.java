@@ -23,7 +23,7 @@ import org.springframework.util.StringUtils;
  * 
  */
 public class DefaultStrategyManager {
-
+	public static final String BANANA_DEFAULT_STRATEGY_PATH = "classpath:META-INF/banana-protocol-core.properties";
 	private Properties defaultStrategies;
 	private ApplicationContext context;
 	private DefaultStrategyManager parent;
