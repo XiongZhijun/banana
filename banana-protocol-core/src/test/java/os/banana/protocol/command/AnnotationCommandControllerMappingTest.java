@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
+import os.banana.protocol.Matcher;
 import os.banana.protocol.command.CommandController.EmptyCommandController;
 
 /**
@@ -32,16 +33,23 @@ public class AnnotationCommandControllerMappingTest extends
 	@Autowired
 	@Qualifier("cc2")
 	private CommandController<?> commandController2;
+	@Autowired
+	@Qualifier("cc3")
+	private CommandController<?> commandController3;
 
 	private Command command1;
 	private Command command2;
-	private Command command3;
+	private Command command3_1;
+	private Command command3_2;
+	private Command command4;
 
 	@Before
 	public void setUp() {
 		command1 = new SimpleCommand("command1");
 		command2 = new SimpleCommand("command2");
-		command3 = new SimpleCommand("command3");
+		command3_1 = new SimpleCommand("command3_1");
+		command3_2 = new SimpleCommand("command3_2");
+		command4 = new SimpleCommand("command4");
 	}
 
 	@Test
@@ -50,8 +58,12 @@ public class AnnotationCommandControllerMappingTest extends
 				mapping.findCommandController(command1));
 		assertEquals(commandController2,
 				mapping.findCommandController(command2));
+		assertEquals(commandController3,
+				mapping.findCommandController(command3_1));
+		assertEquals(commandController3,
+				mapping.findCommandController(command3_2));
 		assertEquals(CommandController.EMPTY_COMMAND_CONTROLLER,
-				mapping.findCommandController(command3));
+				mapping.findCommandController(command4));
 	}
 
 	@RequestId("command1")
@@ -60,6 +72,15 @@ public class AnnotationCommandControllerMappingTest extends
 
 	@RequestId("command2")
 	public static class CommandController2 extends EmptyCommandController {
+	}
+
+	public static class CommandController3 extends EmptyCommandController
+			implements Matcher<Command> {
+
+		public boolean match(Command target) {
+			return target.getId().startsWith("command3");
+		}
+
 	}
 
 }

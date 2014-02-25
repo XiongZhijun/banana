@@ -9,4 +9,6 @@
 		class="os.banana.protocol.command.AnnotationCommandControllerMappingTest.CommandController1"></bean>
 	<bean id="cc2"
 		class="os.banana.protocol.command.AnnotationCommandControllerMappingTest.CommandController2"></bean>
+	<bean id="cc3"
+		class="os.banana.protocol.command.AnnotationCommandControllerMappingTest.CommandController3"></bean>
 </beans>

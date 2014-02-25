@@ -16,6 +16,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.core.OrderComparator;
 
+import os.banana.protocol.Matcher;
 import os.cherry.lang.ArrayUtils;
 
 /**
@@ -26,12 +27,20 @@ import os.cherry.lang.ArrayUtils;
 public class AnnotationCommandControllerMapping implements
 		CommandControllerMapping, ApplicationContextAware {
 	private Map<String, CommandController<?>> controllerMap = new HashMap<String, CommandController<?>>();
+	private List<CommandController<?>> matcherControllers = new ArrayList<CommandController<?>>();
 
 	@SuppressWarnings("unchecked")
 	public <T extends Command> CommandController<T> findCommandController(
 			T command) {
 		String commandId = command.getId();
 		CommandController<?> controller = controllerMap.get(commandId);
+		if (controller == null) {
+			for (CommandController<?> c : matcherControllers) {
+				if (((Matcher<T>) c).match(command)) {
+					return (CommandController<T>) c;
+				}
+			}
+		}
 		return (CommandController<T>) (controller == null ? CommandController.EMPTY_COMMAND_CONTROLLER
 				: controller);
 	}
@@ -41,6 +50,10 @@ public class AnnotationCommandControllerMapping implements
 			throws BeansException {
 		List<CommandController> values = findControllers(applicationContext);
 		for (CommandController controller : values) {
+			if (controller instanceof Matcher) {
+				matcherControllers.add(controller);
+				continue;
+			}
 			Class<? extends CommandController> controllerClass = controller
 					.getClass();
 			RequestId annotation = controllerClass
