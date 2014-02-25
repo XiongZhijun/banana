@@ -60,13 +60,18 @@ public class SimpleProtocolCodecTest {
 	public void testDecode() {
 		FrameCache frameCache = codec.createDecoderState();
 		byte[] message = new byte[] { 0x34, 0x25, 0x23, 0x23, 0x33, 0x44, 0x0D,
-				0x0A, 0x12 };
+				0x0A, 0x12, 0x34, 0x23, 0x23, 0x13, 0x14, 0x14, 0x0D, 0x0A,
+				0x34, 0x12, 0x15 };
 		ByteBuffer input = ByteBuffer.allocate(message.length);
 		input.put(message);
 		input.flip();
 		byte[] array = codec.decode(input, frameCache);
 		assertArrayEquals(new byte[] { 0x23, 0x23, 0x33, 0x44, 0x0D, 0x0A },
 				array);
+		assertArrayEquals(
+				new byte[] { 0x23, 0x23, 0x13, 0x14, 0x14, 0x0D, 0x0A },
+				codec.decode(input, frameCache));
+		assertNull(codec.decode(input, frameCache));
 	}
 
 	@Test
@@ -74,10 +79,32 @@ public class SimpleProtocolCodecTest {
 		IMocksControl control = EasyMock.createControl();
 		FrameCache cache = control.createMock(FrameCache.class);
 		cache.clear();
-		
+
 		EasyMock.replay(cache);
 		codec.finishDecode(cache);
 		EasyMock.verify(cache);
+	}
+
+	@Test
+	public void testSetBufferMaxSize() {
+		codec.setMaxSize(10);
+		FrameCache frameCache = new SimpleFrameCache();
+		codec.decode(newBuffer(new byte[] { 0x11, 0x12, 0x13, 0x14, 0x15 }),
+				frameCache);
+		codec.decode(newBuffer(new byte[] { 0x21, 0x22, 0x23, 0x24, 0x25 }),
+				frameCache);
+		assertArrayEquals(new byte[] { 0x11, 0x12, 0x13, 0x14, 0x15, 0x21,
+				0x22, 0x23, 0x24, 0x25 }, frameCache.remaining());
+
+		codec.decode(newBuffer(new byte[] { 0x31 }), frameCache);
+		assertArrayEquals(new byte[] { 0x31 }, frameCache.remaining());
+	}
+
+	private ByteBuffer newBuffer(byte[] bytes) {
+		ByteBuffer input = ByteBuffer.allocate(bytes.length);
+		input.put(bytes);
+		input.flip();
+		return input;
 	}
 
 }

@@ -24,6 +24,7 @@ public class SimpleProtocolCodec implements
 
 	private byte[] head;
 	private byte[] tail;
+	private int maxSize = 1024 * 4;
 
 	public Void createEncoderState() {
 		return null;
@@ -47,7 +48,14 @@ public class SimpleProtocolCodec implements
 	}
 
 	public byte[] decode(ByteBuffer input, FrameCache frameCache) {
-		frameCache.add(input.array());
+		int remaining = input.remaining();
+		if (remaining + frameCache.size() > maxSize) {
+			frameCache.clear();
+		}
+		byte[] array = new byte[input.remaining()];
+		input.get(array);
+		frameCache.add(array);
+
 		if (frameCache.hasNext()) {
 			return frameCache.poll();
 		}
@@ -64,6 +72,10 @@ public class SimpleProtocolCodec implements
 
 	public void setTail(byte[] tail) {
 		this.tail = tail;
+	}
+
+	public void setMaxSize(int maxSize) {
+		this.maxSize = maxSize;
 	}
 
 }
