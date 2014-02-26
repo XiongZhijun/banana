@@ -26,4 +26,5 @@ public interface Priorities {
 	int LEVEL_8 = 8;
 	int LEVEL_9 = 9;
 	int LEVEL_10 = 10;
+	int LEVEL_MAX = Integer.MAX_VALUE;
 }
