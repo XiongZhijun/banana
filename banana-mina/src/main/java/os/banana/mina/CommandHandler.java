@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import os.banana.protocol.Server;
 import os.banana.protocol.command.Command;
 import os.banana.protocol.command.CommandDispatcher;
+import os.banana.protocol.command.CommandSender;
 import os.banana.protocol.command.SimpleCommand;
 
 /**
@@ -34,7 +35,7 @@ public class CommandHandler extends AbstractIoHandler {
 
 	@Override
 	public void messageReceived(IoSession session, Object message) {
-		MinaSessionSender sender = createCommandSender(session);
+		CommandSender sender = createCommandSender(session);
 		if (message instanceof Command) {
 			commandDispatcher.doDispatch((Command) message, sender, server);
 		} else {
@@ -72,7 +73,7 @@ public class CommandHandler extends AbstractIoHandler {
 				createCommandSender(session), server);
 	}
 
-	private MinaSessionSender createCommandSender(IoSession session) {
+	protected CommandSender createCommandSender(IoSession session) {
 		return new MinaSessionSender(session);
 	}
 
