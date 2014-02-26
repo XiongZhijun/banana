@@ -6,7 +6,7 @@ package os.banana.protocol.command;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import os.banana.protocol.DefaultFuture;
+import os.banana.protocol.CommandFuture;
 import os.banana.protocol.FutureManager;
 import os.banana.protocol.SFuture;
 import os.banana.protocol.Server;
@@ -31,8 +31,8 @@ public abstract class AbstractResponseController<T extends Command> implements
 
 	protected void doResponse(SFuture<T> future, T response,
 			CommandSender sender, Server server) {
-		if (future instanceof DefaultFuture) {
-			((DefaultFuture<T>) future).setResult(response);
+		if (future instanceof CommandFuture) {
+			((CommandFuture<T>) future).setResponse(response);
 		}
 	}
 

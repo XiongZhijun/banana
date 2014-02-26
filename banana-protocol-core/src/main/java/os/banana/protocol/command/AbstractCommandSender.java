@@ -6,7 +6,7 @@ package os.banana.protocol.command;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import os.banana.protocol.DefaultFuture;
+import os.banana.protocol.CommandFuture;
 import os.banana.protocol.FutureManager;
 import os.banana.protocol.SFuture;
 
@@ -26,7 +26,7 @@ public abstract class AbstractCommandSender implements CommandSender {
 	}
 
 	protected <T extends Command> SFuture<T> buildFuture(T command) {
-		return new DefaultFuture<T>();
+		return new CommandFuture<T>();
 	}
 
 	protected abstract <T extends Command> void doSend(T command);

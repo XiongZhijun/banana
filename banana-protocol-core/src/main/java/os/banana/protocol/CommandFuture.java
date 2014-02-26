@@ -9,11 +9,14 @@ package os.banana.protocol;
  * @email hust.xzj@gmail.com
  * 
  */
-public class DefaultFuture<V> extends AbstractFuture<V> {
+public class CommandFuture<V> extends AbstractFuture<V> {
 
 	@Override
 	protected boolean cancelOwner(boolean mayInterruptIfRunning) {
 		return false;
 	}
 
+	public void setResponse(V value) {
+		setResult(value);
+	}
 }

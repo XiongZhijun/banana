@@ -175,7 +175,7 @@ public abstract class AbstractFuture<V> implements SFuture<V> {
 		}
 	}
 
-	public final void setResult(V value) {
+	protected final void setResult(V value) {
 		assert !isDone();
 
 		synchronized (latch) {
