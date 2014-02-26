@@ -17,27 +17,20 @@ import org.apache.mina.transport.tcp.TcpSessionConfig;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import os.banana.protocol.ReadWriteLockSupport;
+import os.banana.protocol.AbstractServer;
 import os.banana.protocol.Server;
-import os.banana.protocol.ServerManager;
 
 /**
  * @author Xiong Zhijun
  * @email hust.xzj@gmail.com
  * 
  */
-public class MinaTcpServer extends ReadWriteLockSupport implements Server,
+public class MinaTcpServer extends AbstractServer implements Server,
 		InitializingBean {
 
 	/** 端口号 */
 	private int port;
-	/** 服务名称 */
-	private String name;
-	/** 服务编码，这个必须要设置的 */
-	private String code;
 	private NioTcpServer tcpServer;
-	@Autowired
-	private ServerManager serverManager;
 	@Autowired
 	private IoHandler handler;
 	@Autowired(required = false)
@@ -77,18 +70,6 @@ public class MinaTcpServer extends ReadWriteLockSupport implements Server,
 		return running;
 	}
 
-	public boolean isStopped() {
-		return !isRunning();
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getName() {
-		return this.name;
-	}
-
 	public void setPort(int port) {
 		this.port = port;
 	}
@@ -126,22 +107,6 @@ public class MinaTcpServer extends ReadWriteLockSupport implements Server,
 
 	public void setHandlerExecutor(IoHandlerExecutor handlerExecutor) {
 		this.handlerExecutor = handlerExecutor;
-	}
-
-	public void setServerManager(ServerManager serverManager) {
-		this.serverManager = serverManager;
-	}
-
-	public String getCode() {
-		return this.code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
-	}
-
-	public void afterPropertiesSet() throws Exception {
-		serverManager.regist(this);
 	}
 
 }

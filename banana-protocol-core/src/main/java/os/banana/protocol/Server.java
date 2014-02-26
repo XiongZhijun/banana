@@ -4,6 +4,7 @@
  */
 package os.banana.protocol;
 
+import java.util.Set;
 import java.util.concurrent.locks.Lock;
 
 /**
@@ -20,12 +21,20 @@ public interface Server {
 	void start();
 
 	void stop();
-	
+
 	boolean isRunning();
-	
+
 	boolean isStopped();
-	
+
 	Lock getReadLock();
-	
+
 	Lock getWriteLock();
+
+	void registTerminal(TerminalSession terminalSession);
+
+	void unregistTerminal(String code);
+
+	TerminalSession getTerminalSession(String code);
+
+	Set<String> getAllTerminals();
 }
