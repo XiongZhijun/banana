@@ -9,6 +9,8 @@ import java.util.Map;
 import org.springframework.context.ApplicationContext;
 import org.springframework.util.StringUtils;
 
+import os.cherry.lang.ArrayUtils;
+
 /**
  * 
  * @author Xiong Zhijun
