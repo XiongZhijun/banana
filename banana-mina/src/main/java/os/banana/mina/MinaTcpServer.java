@@ -45,8 +45,12 @@ public class MinaTcpServer implements Server, InitializingBean {
 	private TcpSessionConfig sessionConfig = new DefaultTcpSessionConfig();
 	private SelectorLoopPool selectorLoopPool;
 	private IoHandlerExecutor handlerExecutor;
+	private boolean running = false;
 
 	public void start() {
+		if (isRunning()) {
+			return;
+		}
 		if (selectorLoopPool == null) {
 			selectorLoopPool = new FixedSelectorLoopPool("Server", Runtime
 					.getRuntime().availableProcessors() + 1);
@@ -58,12 +62,21 @@ public class MinaTcpServer implements Server, InitializingBean {
 		tcpServer.setSessionConfig(sessionConfig);
 		tcpServer.setIoHandler(handler);
 		tcpServer.bind(new InetSocketAddress(port));
+		running = true;
 	}
 
 	public void stop() {
 		if (tcpServer != null) {
 			tcpServer.unbind();
 		}
+	}
+
+	public boolean isRunning() {
+		return running;
+	}
+
+	public boolean isStopped() {
+		return !isRunning();
 	}
 
 	public void setName(String name) {

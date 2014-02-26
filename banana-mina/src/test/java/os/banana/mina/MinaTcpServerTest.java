@@ -35,6 +35,11 @@ public class MinaTcpServerTest extends AbstractJUnit4SpringContextTests {
 	private static CountDownLatch countDownLatch;
 
 	@Test
+	public void testIsRunning() {
+		assertTrue(server.isRunning());
+	}
+
+	@Test
 	public void testSetPort() {
 		assertEquals(29999, server.getPort());
 	}
