@@ -4,6 +4,8 @@
  */
 package os.banana.protocol;
 
+import java.util.concurrent.locks.Lock;
+
 /**
  * @author Xiong Zhijun
  * @email hust.xzj@gmail.com
@@ -22,4 +24,8 @@ public interface Server {
 	boolean isRunning();
 	
 	boolean isStopped();
+	
+	Lock getReadLock();
+	
+	Lock getWriteLock();
 }

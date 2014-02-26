@@ -17,6 +17,7 @@ import org.apache.mina.transport.tcp.TcpSessionConfig;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import os.banana.protocol.ReadWriteLockSupport;
 import os.banana.protocol.Server;
 import os.banana.protocol.ServerManager;
 
@@ -25,7 +26,8 @@ import os.banana.protocol.ServerManager;
  * @email hust.xzj@gmail.com
  * 
  */
-public class MinaTcpServer implements Server, InitializingBean {
+public class MinaTcpServer extends ReadWriteLockSupport implements Server,
+		InitializingBean {
 
 	/** 端口号 */
 	private int port;
