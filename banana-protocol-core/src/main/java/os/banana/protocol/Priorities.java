@@ -15,6 +15,7 @@ import org.springframework.core.Ordered;
  */
 public interface Priorities {
 
+	int LEVEL_0 = 0;
 	int LEVEL_1 = 1;
 	int LEVEL_2 = 2;
 	int LEVEL_3 = 3;
