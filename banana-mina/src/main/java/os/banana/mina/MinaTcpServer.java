@@ -47,8 +47,8 @@ public class MinaTcpServer extends AbstractServer implements Server,
 			return;
 		}
 		if (selectorLoopPool == null) {
-			selectorLoopPool = new FixedSelectorLoopPool("Server", Runtime
-					.getRuntime().availableProcessors() + 1);
+			selectorLoopPool = new FixedSelectorLoopPool("Server-" + getCode(),
+					Runtime.getRuntime().availableProcessors() + 1);
 		}
 		tcpServer = new NioTcpServer(sessionConfig, selectorLoopPool,
 				handlerExecutor);
