@@ -29,6 +29,8 @@ public class MinaTcpServer implements Server {
 	private int port;
 	/** 服务名称 */
 	private String name;
+	/** 服务编码，这个必须要设置的 */
+	private String code;
 	private NioTcpServer tcpServer;
 	@Autowired
 	private IoHandler handler;
@@ -103,6 +105,14 @@ public class MinaTcpServer implements Server {
 
 	public void setHandlerExecutor(IoHandlerExecutor handlerExecutor) {
 		this.handlerExecutor = handlerExecutor;
+	}
+
+	public String getCode() {
+		return this.code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 }

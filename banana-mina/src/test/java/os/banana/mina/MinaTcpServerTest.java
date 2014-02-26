@@ -36,6 +36,11 @@ public class MinaTcpServerTest extends AbstractJUnit4SpringContextTests {
 	}
 
 	@Test
+	public void testGetCode() {
+		assertEquals("MinaServerCode1", server.getCode());
+	}
+
+	@Test
 	public void testGetName() {
 		assertEquals("MinaServer1", server.getName());
 	}

@@ -13,6 +13,8 @@ public interface Server {
 
 	String getName();
 
+	String getCode();
+
 	void start();
 
 	void stop();
