@@ -13,6 +13,7 @@ public class SimpleCommand implements Command {
 
 	private String id;
 	private Object content;
+	private MeasureData measureData;
 
 	public SimpleCommand() {
 		this(null);
@@ -49,6 +50,18 @@ public class SimpleCommand implements Command {
 
 	public String getSendedSerialNumber() {
 		return this.id;
+	}
+
+	public boolean isMeasureData() {
+		return measureData != null;
+	}
+
+	public MeasureData getMeasureData() {
+		return measureData;
+	}
+
+	public void setMeasureData(MeasureData measureData) {
+		this.measureData = measureData;
 	}
 
 }

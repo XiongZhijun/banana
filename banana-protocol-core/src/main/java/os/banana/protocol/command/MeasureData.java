@@ -4,20 +4,21 @@
  */
 package os.banana.protocol.command;
 
+import java.util.Date;
+import java.util.Map;
+
 /**
  * @author Xiong Zhijun
  * @email hust.xzj@gmail.com
  * 
  */
-public interface Command {
+public interface MeasureData {
 
-	String getId();
+	String getTerminalCode();
 
-	String buildSendSerialNumber();
+	Date getDate();
 
-	String getSendedSerialNumber();
+	Object getFiledValue(String field);
 
-	boolean isMeasureData();
-
-	MeasureData getMeasureData();
+	Map<String, Object> getFiledValues();
 }
