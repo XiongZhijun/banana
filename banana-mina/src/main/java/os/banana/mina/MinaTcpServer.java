@@ -14,16 +14,18 @@ import org.apache.mina.transport.nio.NioTcpServer;
 import org.apache.mina.transport.nio.SelectorLoopPool;
 import org.apache.mina.transport.tcp.DefaultTcpSessionConfig;
 import org.apache.mina.transport.tcp.TcpSessionConfig;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import os.banana.protocol.Server;
+import os.banana.protocol.ServerManager;
 
 /**
  * @author Xiong Zhijun
  * @email hust.xzj@gmail.com
  * 
  */
-public class MinaTcpServer implements Server {
+public class MinaTcpServer implements Server, InitializingBean {
 
 	/** 端口号 */
 	private int port;
@@ -32,6 +34,8 @@ public class MinaTcpServer implements Server {
 	/** 服务编码，这个必须要设置的 */
 	private String code;
 	private NioTcpServer tcpServer;
+	@Autowired
+	private ServerManager serverManager;
 	@Autowired
 	private IoHandler handler;
 	@Autowired(required = false)
@@ -57,7 +61,9 @@ public class MinaTcpServer implements Server {
 	}
 
 	public void stop() {
-		tcpServer.unbind();
+		if (tcpServer != null) {
+			tcpServer.unbind();
+		}
 	}
 
 	public void setName(String name) {
@@ -107,12 +113,20 @@ public class MinaTcpServer implements Server {
 		this.handlerExecutor = handlerExecutor;
 	}
 
+	public void setServerManager(ServerManager serverManager) {
+		this.serverManager = serverManager;
+	}
+
 	public String getCode() {
 		return this.code;
 	}
 
 	public void setCode(String code) {
 		this.code = code;
+	}
+
+	public void afterPropertiesSet() throws Exception {
+		serverManager.regist(this);
 	}
 
 }

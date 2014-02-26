@@ -6,7 +6,7 @@
 	<bean id="server" class="os.banana.mina.MinaTcpServer" p:port="29999"
 		p:name="MinaServer1" p:code="MinaServerCode1" init-method="start">
 	</bean>
-
+	<bean class="os.banana.protocol.ServerManager"></bean>
 	<bean class="os.banana.mina.ProtocolCodecFilterFactoryBean"></bean>
 	<bean class="os.banana.mina.MinaTcpServerTest.TestIoHandler"></bean>
 	<bean class="os.banana.mina.StringEncoder"></bean>

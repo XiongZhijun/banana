@@ -17,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
+import os.banana.protocol.ServerManager;
+
 /**
  * @author Xiong Zhijun
  * @email hust.xzj@gmail.com
@@ -28,6 +30,8 @@ public class MinaTcpServerTest extends AbstractJUnit4SpringContextTests {
 	private static final String HELLO = "hello";
 	@Autowired
 	private MinaTcpServer server;
+	@Autowired
+	private ServerManager serverManager;
 	private static CountDownLatch countDownLatch;
 
 	@Test
@@ -38,6 +42,7 @@ public class MinaTcpServerTest extends AbstractJUnit4SpringContextTests {
 	@Test
 	public void testGetCode() {
 		assertEquals("MinaServerCode1", server.getCode());
+		assertEquals(server, serverManager.getServer("MinaServerCode1"));
 	}
 
 	@Test
