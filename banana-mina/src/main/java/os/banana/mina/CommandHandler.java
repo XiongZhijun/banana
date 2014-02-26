@@ -34,7 +34,7 @@ public class CommandHandler extends AbstractIoHandler {
 
 	@Override
 	public void messageReceived(IoSession session, Object message) {
-		MinaSessionSender sender = new MinaSessionSender(session);
+		MinaSessionSender sender = createCommandSender(session);
 		if (message instanceof Command) {
 			commandDispatcher.doDispatch((Command) message, sender, server);
 		} else {
@@ -46,13 +46,13 @@ public class CommandHandler extends AbstractIoHandler {
 	@Override
 	public void sessionOpened(IoSession session) {
 		commandDispatcher.doDispatch(SESSION_OPEN_COMMAND,
-				new MinaSessionSender(session), server);
+				createCommandSender(session), server);
 	}
 
 	@Override
 	public void sessionClosed(IoSession session) {
 		commandDispatcher.doDispatch(SESSION_CLOSE_COMMAND,
-				new MinaSessionSender(session), server);
+				createCommandSender(session), server);
 	}
 
 	@Override
@@ -69,7 +69,11 @@ public class CommandHandler extends AbstractIoHandler {
 	public void exceptionCaught(IoSession session, Exception cause) {
 		commandDispatcher.doDispatch(
 				new SimpleCommand(EXCEPTION_CAUGHT, cause),
-				new MinaSessionSender(session), server);
+				createCommandSender(session), server);
+	}
+
+	private MinaSessionSender createCommandSender(IoSession session) {
+		return new MinaSessionSender(session);
 	}
 
 	public CommandDispatcher getCommandDispatcher() {
