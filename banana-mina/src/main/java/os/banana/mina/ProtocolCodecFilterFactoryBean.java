@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.AbstractFactoryBean;
 import org.springframework.core.Ordered;
 
+import os.banana.protocol.Priorities;
+
 /**
  * @author Xiong Zhijun
  * @email hust.xzj@gmail.com
@@ -49,7 +51,7 @@ public class ProtocolCodecFilterFactoryBean extends
 		}
 
 		public int getOrder() {
-			return 0;
+			return Priorities.LEVEL_0;
 		}
 
 	}
