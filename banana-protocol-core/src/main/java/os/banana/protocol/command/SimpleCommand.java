@@ -14,6 +14,7 @@ public class SimpleCommand implements Command {
 	private String id;
 	private Object content;
 	private MeasureData measureData;
+	private String terminalCode;
 
 	public SimpleCommand() {
 		this(null);
@@ -62,6 +63,14 @@ public class SimpleCommand implements Command {
 
 	public void setMeasureData(MeasureData measureData) {
 		this.measureData = measureData;
+	}
+
+	public String getTerminalCode() {
+		return this.terminalCode;
+	}
+
+	public void setTerminalCode(String terminalCode) {
+		this.terminalCode = terminalCode;
 	}
 
 }

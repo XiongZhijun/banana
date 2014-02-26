@@ -35,6 +35,14 @@ public class SimpleCommandTest {
 	}
 
 	@Test
+	public void testGetTerminalCode() {
+		assertTrue(StringUtils.isBlank(command.getTerminalCode()));
+		String terminalCode = "terminal1";
+		command.setTerminalCode(terminalCode);
+		assertEquals(terminalCode, command.getTerminalCode());
+	}
+
+	@Test
 	public void testGetContent() {
 		Object content = new Object();
 		command.setContent(content);
