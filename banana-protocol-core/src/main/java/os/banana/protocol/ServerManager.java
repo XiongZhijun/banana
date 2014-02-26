@@ -9,16 +9,13 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReadWriteLock;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
  * @author Xiong Zhijun
  * @email hust.xzj@gmail.com
  * 
  */
-public class ServerManager {
+public class ServerManager extends ReadWriteLockSupport {
 	private Map<String, Server> serverMap = new HashMap<String, Server>();
 
 	public void regist(Server server) {
@@ -65,9 +62,5 @@ public class ServerManager {
 		servers.addAll(serverMap.values());
 		return servers;
 	}
-
-	private ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
-	private Lock readLock = readWriteLock.readLock();
-	private Lock writeLock = readWriteLock.writeLock();
 
 }

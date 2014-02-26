@@ -9,9 +9,6 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReadWriteLock;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import os.banana.protocol.command.Command;
 
@@ -20,12 +17,9 @@ import os.banana.protocol.command.Command;
  * @email hust.xzj@gmail.com
  * 
  */
-public class FutureManager {
+public class FutureManager extends ReadWriteLockSupport {
 
 	private static final int FIVE_MINUTES = 5;
-	private ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
-	private Lock readLock = readWriteLock.readLock();
-	private Lock writeLock = readWriteLock.writeLock();
 	private Map<Object, SFuture<?>> futureMap = new HashMap<Object, SFuture<?>>();
 	private long period = FIVE_MINUTES;
 	private TimeUnit timeUnit = TimeUnit.MINUTES;
