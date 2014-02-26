@@ -54,6 +54,7 @@ public class ServerManagerTest {
 	@Test
 	public void testUnregist() {
 		expect(server1.getCode()).andReturn("server1");
+		server1.stop();
 		replay(server1);
 		manager.regist(server1);
 		assertEquals(server1, manager.getServer("server1"));

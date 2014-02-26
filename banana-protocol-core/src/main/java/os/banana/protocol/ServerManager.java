@@ -30,7 +30,6 @@ public class ServerManager {
 				return;
 			}
 			if (existServer != null) {
-				existServer.stop();
 				unregist(code);
 			}
 			serverMap.put(code, server);
@@ -51,20 +50,24 @@ public class ServerManager {
 	public void unregist(String code) {
 		writeLock.lock();
 		try {
+			Server server = serverMap.get(code);
+			if (server != null) {
+				server.stop();
+			}
 			serverMap.remove(code);
 		} finally {
 			writeLock.unlock();
 		}
 	}
 
-	private ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
-	private Lock readLock = readWriteLock.readLock();
-	private Lock writeLock = readWriteLock.writeLock();
-
 	public Collection<Server> getAllServers() {
 		List<Server> servers = new ArrayList<Server>();
 		servers.addAll(serverMap.values());
 		return servers;
 	}
+
+	private ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
+	private Lock readLock = readWriteLock.readLock();
+	private Lock writeLock = readWriteLock.writeLock();
 
 }
