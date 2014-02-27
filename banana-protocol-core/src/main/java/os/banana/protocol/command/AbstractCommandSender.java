@@ -31,6 +31,10 @@ public abstract class AbstractCommandSender implements CommandSender {
 
 	protected abstract <T extends Command> void doSend(T command);
 
+	public FutureManager getFutureManager() {
+		return futureManager;
+	}
+
 	public void setFutureManager(FutureManager futureManager) {
 		this.futureManager = futureManager;
 	}
