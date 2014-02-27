@@ -24,6 +24,11 @@
 	</properties>
 	<dependencies>
 		<dependency>
+			<groupId>os.banana</groupId>
+			<artifactId>banana-protocol-core</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
 			<groupId>os.cherry</groupId>
 			<artifactId>cherry-lang</artifactId>
 			<version>${cherry-lang.version}</version>
@@ -57,11 +62,6 @@
 			<artifactId>easymock</artifactId>
 			<version>${easymock.version}</version>
 			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>os.banana</groupId>
-			<artifactId>banana-protocol-core</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 </project>
