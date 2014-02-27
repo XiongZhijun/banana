@@ -47,12 +47,14 @@ public class SimpleProtocolCodecTest {
 	public void testEncode() {
 		byte[] message = new byte[] { 0x11, 0x12, 0x23, 0x34 };
 		ByteBuffer buffer = codec.encode(message, null);
-		assertArrayEquals(message, buffer.array());
+		assertArrayEquals(new byte[] { 0x23, 0x23, 0x11, 0x12, 0x23, 0x34,
+				0x0D, 0x0A }, buffer.array());
 	}
 
 	@Test
 	public void testEncodeByNull() {
 		ByteBuffer buffer = codec.encode(null, null);
+		assertEquals(0, buffer.remaining());
 		assertArrayEquals(new byte[0], buffer.array());
 	}
 
@@ -66,10 +68,8 @@ public class SimpleProtocolCodecTest {
 		input.put(message);
 		input.flip();
 		byte[] array = codec.decode(input, frameCache);
-		assertArrayEquals(new byte[] { 0x23, 0x23, 0x33, 0x44, 0x0D, 0x0A },
-				array);
-		assertArrayEquals(
-				new byte[] { 0x23, 0x23, 0x13, 0x14, 0x14, 0x0D, 0x0A },
+		assertArrayEquals(new byte[] { 0x33, 0x44 }, array);
+		assertArrayEquals(new byte[] { 0x13, 0x14, 0x14 },
 				codec.decode(input, frameCache));
 		assertNull(codec.decode(input, frameCache));
 	}

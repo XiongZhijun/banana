@@ -11,7 +11,6 @@ import org.apache.mina.codec.ProtocolEncoder;
 
 import os.banana.protocol.frame.FrameCache;
 import os.banana.protocol.frame.SimpleFrameCache;
-import os.cherry.lang.ArrayUtils;
 
 /**
  * @author Xiong Zhijun
@@ -32,10 +31,13 @@ public class SimpleProtocolCodec implements
 
 	public ByteBuffer encode(byte[] message, Void context) {
 		if (message == null) {
-			message = ArrayUtils.EMPTY_BYTE_ARRAY;
+			return ByteBuffer.allocate(0);
 		}
-		ByteBuffer buffer = ByteBuffer.allocate(message.length);
+		ByteBuffer buffer = ByteBuffer.allocate(head.length + message.length
+				+ tail.length);
+		buffer.put(head);
 		buffer.put(message);
+		buffer.put(tail);
 		buffer.flip();
 		return buffer;
 	}

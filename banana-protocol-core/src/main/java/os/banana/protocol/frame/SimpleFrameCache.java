@@ -37,8 +37,8 @@ public class SimpleFrameCache implements FrameCache {
 		if (endIndex < 0) {
 			return ArrayUtils.EMPTY_BYTE_ARRAY;
 		}
-		byte[] removed = array.remove(startIndex, endIndex + tail.length);
-		array.remove(0, startIndex);
+		byte[] removed = array.remove(startIndex + head.length, endIndex);
+		array.remove(0, startIndex + head.length + tail.length);
 		return removed;
 	}
 
@@ -51,7 +51,7 @@ public class SimpleFrameCache implements FrameCache {
 		if (endIndex < 0) {
 			return ArrayUtils.EMPTY_BYTE_ARRAY;
 		}
-		return array.get(startIndex, endIndex + tail.length);
+		return array.get(startIndex + head.length, endIndex);
 	}
 
 	public byte[] remaining() {
