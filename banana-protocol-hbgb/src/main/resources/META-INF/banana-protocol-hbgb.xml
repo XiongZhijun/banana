@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:c="http://www.springframework.org/schema/c" xmlns:cache="http://www.springframework.org/schema/cache"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+		http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+		http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+	
+	<context:component-scan base-package="os.banana.hbgb"></context:component-scan>
+	
+	<bean class="os.banana.mina.MinaTcpServer" p:name="环保国标协议" p:code="hbgb"
+		p:port="19999" init-method="start"></bean>
+	<bean class="os.banana.protocol.FutureManager"></bean>
+	<bean class="os.banana.mina.ProtocolCodecFilterFactoryBean"></bean>
+	<bean class="os.banana.mina.SimpleProtocolCodec" p:head="&#x23;&#x23;"
+		p:tail="&#x0d;&#x0a;"></bean>
+	<bean class="os.banana.mina.CommandHandler" />
+	<bean class="os.banana.protocol.command.SimpleCommandDispatcher"></bean>
+	<bean class="os.banana.protocol.command.AnnotationCommandControllerMapping"></bean>
+	<bean class="os.banana.mina.controllers.ExceptionCommandController"></bean>
+	<bean class="os.banana.mina.CommandFilter"></bean>
+</beans>

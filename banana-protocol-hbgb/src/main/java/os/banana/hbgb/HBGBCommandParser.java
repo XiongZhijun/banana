@@ -25,7 +25,7 @@ public class HBGBCommandParser implements CommandEncoder, CommandDecoder {
 	private static final String MN = "MN";
 	private static final String CN = "CN";
 	private static final Pattern COMMAND_PATTERN = Pattern
-			.compile("^((\\w+=[^=;]+;)+)CP=&&&&$");
+			.compile("^((\\w+=[^=;]+;)+)CP=&&.*&&$");
 	private static final Pattern RECORD_PATTERN = Pattern
 			.compile("^(\\w+)=([^=;]+)");
 
