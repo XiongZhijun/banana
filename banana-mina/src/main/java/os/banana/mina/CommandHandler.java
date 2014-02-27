@@ -11,10 +11,15 @@ import static os.banana.mina.MinaCommands.SERVICE_INACTIVATED_COMMAND;
 import static os.banana.mina.MinaCommands.SESSION_CLOSE_COMMAND;
 import static os.banana.mina.MinaCommands.SESSION_OPEN_COMMAND;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.mina.api.AbstractIoHandler;
 import org.apache.mina.api.IoService;
 import org.apache.mina.api.IoSession;
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 
 import os.banana.protocol.Server;
 import os.banana.protocol.command.Command;
@@ -27,11 +32,14 @@ import os.banana.protocol.command.SimpleCommand;
  * @email hust.xzj@gmail.com
  * 
  */
-public class CommandHandler extends AbstractIoHandler {
+public class CommandHandler extends AbstractIoHandler implements
+		ApplicationContextAware {
+	private static final Log log = LogFactory.getLog(CommandHandler.class);
 	@Autowired
 	private CommandDispatcher commandDispatcher;
 	@Autowired
 	private Server server;
+	private ApplicationContext applicationContext;
 
 	@Override
 	public void messageReceived(IoSession session, Object message) {
@@ -68,13 +76,18 @@ public class CommandHandler extends AbstractIoHandler {
 
 	@Override
 	public void exceptionCaught(IoSession session, Exception cause) {
-		commandDispatcher.doDispatch(
-				new SimpleCommand(EXCEPTION_CAUGHT, cause),
-				createCommandSender(session), server);
+		try {
+			commandDispatcher.doDispatch(new SimpleCommand(EXCEPTION_CAUGHT,
+					cause), createCommandSender(session), server);
+		} catch (Exception e) {
+			log.error("dispatch exception command failed.", e);
+		}
 	}
 
 	protected CommandSender createCommandSender(IoSession session) {
-		return new MinaSessionSender(session);
+		MinaSessionSender sender = new MinaSessionSender(session);
+		applicationContext.getAutowireCapableBeanFactory().autowireBean(sender);
+		return sender;
 	}
 
 	public CommandDispatcher getCommandDispatcher() {
@@ -91,6 +104,11 @@ public class CommandHandler extends AbstractIoHandler {
 
 	public void setServer(Server server) {
 		this.server = server;
+	}
+
+	public void setApplicationContext(ApplicationContext applicationContext)
+			throws BeansException {
+		this.applicationContext = applicationContext;
 	}
 
 }
