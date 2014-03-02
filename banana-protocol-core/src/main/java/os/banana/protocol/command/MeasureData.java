@@ -14,6 +14,8 @@ import java.util.Map;
  */
 public interface MeasureData {
 
+	String TABLE_NAME = MeasureData.class.getSimpleName();
+
 	String getTerminalCode();
 
 	Date getDate();
