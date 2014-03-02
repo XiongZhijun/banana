@@ -18,7 +18,7 @@ public interface MeasureData {
 
 	Date getDate();
 
-	Object getFiledValue(String field);
+	Object getFieldValue(String field);
 
-	Map<String, Object> getFiledValues();
+	Map<String, Object> getFieldValues();
 }
