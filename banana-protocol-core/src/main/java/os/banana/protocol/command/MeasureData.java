@@ -14,11 +14,13 @@ import java.util.Map;
  */
 public interface MeasureData {
 
+	String TABLE_NAME = MeasureData.class.getSimpleName();
+
 	String getTerminalCode();
 
 	Date getDate();
 
-	Object getFiledValue(String field);
+	Object getFieldValue(String field);
 
-	Map<String, Object> getFiledValues();
+	Map<String, Object> getFieldValues();
 }
