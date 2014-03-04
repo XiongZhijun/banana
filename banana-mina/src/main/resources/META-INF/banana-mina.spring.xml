@@ -12,10 +12,17 @@
 		http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<import resource="classpath:META-INF/banana-mina.spring.xml" />
+	<bean id="server" class="os.banana.mina.MinaTcpServer" p:name="${server.name}"
+		p:code="${server.code}" p:port="${server.port}" init-method="start"></bean>
 
-	<context:component-scan base-package="os.banana.hbgb"></context:component-scan>
+	<bean id="futureManager" class="os.banana.protocol.FutureManager"></bean>
+	<bean id="commandDispatcher" class="os.banana.protocol.command.SimpleCommandDispatcher"></bean>
+	<bean id="commandControllerMapping"
+		class="os.banana.protocol.command.AnnotationCommandControllerMapping"></bean>
 
-	<bean class="os.banana.mina.SimpleProtocolCodec" p:head="&#x23;&#x23;"
-		p:tail="&#x0d;&#x0a;"></bean>
+	<bean id="protocolCodecFilter" class="os.banana.mina.ProtocolCodecFilterFactoryBean"></bean>
+	<bean id="commandFilter" class="os.banana.mina.CommandFilter"></bean>
+	<bean id="ioHandler" class="os.banana.mina.CommandHandler" />
+
+	<bean id="exceptionCommandController" class="os.banana.mina.controllers.ExceptionCommandController"></bean>
 </beans>
